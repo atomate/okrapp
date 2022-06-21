@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,5 @@ Route::get('/about', function (){
     return view('about');
 })->name('about');
 Auth::routes();
+
+Route::get('/company/create', [CompanyController::class, 'create']);
