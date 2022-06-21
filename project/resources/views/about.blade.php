@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                         <div class="alert alert-success" role="alert">
-                            Home
+                            About
                         </div>
                 </div>
             </div>
