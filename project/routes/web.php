@@ -14,12 +14,10 @@ use App\Http\Controllers\CompanyController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/about', function (){
+    return view('about');
+})->name('about');
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/company/create', [CompanyController::class, 'create']);
