@@ -21,3 +21,7 @@ Route::get('/about', function (){
 Auth::routes();
 
 Route::get('/company/create', [CompanyController::class, 'create']);
+
+Route::get('/template', function(){
+    return view('templates/index');
+});
