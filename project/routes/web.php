@@ -23,7 +23,6 @@ Auth::routes();
 
 Route::get('/company/create', [CompanyController::class, 'create']);
 
-<<<<<<< HEAD
 Route::get('/objectives',[ObjectiveController::class,'index'])->name('objectives.index');
 
 Route::get('/objectives/create',[ObjectiveController::class,'create'])->name('objectives.create');
@@ -37,8 +36,6 @@ Route::get('/objectives/{objective}/edit',[ObjectiveController::class,'edit'])->
 Route::put('/objectives/{objective}',[ObjectiveController::class,'update'])->name('objectives.update');
 
 Route::delete('/objectives/{objective}',[ObjectiveController::class,'destroy'])->name('objectives.destroy');
-=======
 Route::get('/template', function(){
     return view('templates/index');
 });
->>>>>>> main
