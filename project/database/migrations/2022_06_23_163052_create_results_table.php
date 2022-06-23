@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Company extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class Company extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('company', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('user_id');
-            $table->index('user_idx');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->smallInteger('progress');
+            $table->unsignedBigInteger('objective_id');
+            $table->index('objective_idx');
+            $table->foreign('objective_id')->references('id')->on('objective');
             $table->timestamps();
         });
     }
@@ -31,7 +31,6 @@ class Company extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('results');
     }
-}
+};
