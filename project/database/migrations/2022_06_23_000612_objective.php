@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniesObjectivesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateCompaniesObjectivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies_objectives', function (Blueprint $table) {
+        Schema::create('objective', function (Blueprint $table) {
             $table->id();
-            $table->foreign('companies_id')->references('id')->on('company');
             $table->string('name');
+            // $table->foreign('company_id')
+            // ->references('id')
+            // ->on('company')
+            // ->onDelete('cascade');
             $table->timestamps();
-
         });
     }
 
@@ -29,6 +31,6 @@ class CreateCompaniesObjectivesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies_objectives');
+        //
     }
-}
+};
