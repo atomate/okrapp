@@ -36,3 +36,6 @@ Route::get('/objectives/{objective}/edit',[ObjectiveController::class,'edit'])->
 Route::put('/objectives/{objective}',[ObjectiveController::class,'update'])->name('objectives.update');
 
 Route::delete('/objectives/{objective}',[ObjectiveController::class,'destroy'])->name('objectives.destroy');
+Route::get('/template', function(){
+    return view('templates/index');
+});
