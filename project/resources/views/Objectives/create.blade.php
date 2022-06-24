@@ -25,6 +25,14 @@
     <form action="{{route('objectives.store')}}" method="post" >
         @csrf
 
+        <label>Select Company</label>
+
+        <select name="company_id" class="form-control">
+            @foreach($companies as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+            @endforeach
+        </select>
+
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

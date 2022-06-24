@@ -14,13 +14,10 @@ class Objective extends Model
         'name'
     ];
 
-    public function Company()
+    public function company()
     {
         return $this->belongsTo(Company::class);
     }
 
-    public function Objective()
-    {
-        return $this->hasMany(Objective::class); //De pus la Olga in Company Model
-    }
+    
 }

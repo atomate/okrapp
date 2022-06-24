@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Objective;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class ObjectiveController extends Controller
@@ -26,7 +27,8 @@ class ObjectiveController extends Controller
      */
     public function create()
     {
-            return view('objectives.create');
+            $companies = Company::all();
+            return view('objectives.create',compact('companies'));
     }
 
     /**
@@ -37,11 +39,16 @@ class ObjectiveController extends Controller
      */
     public function store(Request $request)
     {
+        $company = Company::findOrFail($request->company_id);
+        $company->objective()->create([
+            'name' => $request->name
+        ]);
+        
         $request->validate([
             'name' => 'required',
         ]);
 
-        Objective::create($request->all());
+        // Objective::create($request->all());
 
         return redirect()->route('objectives.index')
             ->with('success', 'Objective created successfully.');

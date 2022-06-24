@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('objective', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            // $table->foreign('company_id')
-            // ->references('id')
-            // ->on('company')
-            // ->onDelete('cascade');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')
+            ->references('id')
+            ->on('company')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

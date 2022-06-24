@@ -5,10 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Company extends Model
 {
     use HasFactory;
 
     protected $table = "company";
     protected $fillable = ['name'];
+
+    public function objective()
+    {
+        return $this->hasMany(Objective::class,'company_id','id'); 
+    }
 }
