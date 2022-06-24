@@ -20,6 +20,5 @@
         {{$result->name}}<br>
     @endif
 @endforeach
-{{dd(1)}}
 </body>
 </html>

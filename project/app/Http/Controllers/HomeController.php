@@ -27,8 +27,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = User::find(1);
-        event(new DailyNotificationEvent($user));
         return view('home');
     }
 }
