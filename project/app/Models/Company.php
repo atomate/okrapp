@@ -14,7 +14,7 @@ class Company extends Model
 
     public function objectives()
     {
-        return $this->hasMany(Objective::class); //De pus la Olga in Company Model
+        return $this->hasMany(Objective::class,); //De pus la Olga in Company Model
     }
 
 }

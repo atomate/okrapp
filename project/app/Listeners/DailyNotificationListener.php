@@ -25,24 +25,12 @@ class DailyNotificationListener
 
     public function handle($event)
     {
-        $user = User::find($event->user->id)->toArray();
         $name = $event->user->name;
-        $companies = Company::all()->where('user_id',$event->user->id)->pluck('id')->toArray();
-
-        foreach ($companies as $id)
-        {
-            $objectives[] = Objective::all()->where('company_id',$id)->pluck('id')->toArray();
-        }
-        $objectives = call_user_func_array('array_merge', $objectives);
-
-        foreach ($objectives as $id)
-        {
-            $results[] = Result::all()->where('objective_id',$id)->where('progress', '<' ,'100');
-        }
+        $user = User::find($event->user->id);
+        $user = $user->load('results');
 
         $data = [
-            'results' => $results,
-            'user' => $user
+            'results' => $user->results
         ];
 
         Mail::send('mail.DailyNotification', $data, function($message) use ($user,$name) {

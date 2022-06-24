@@ -15,10 +15,11 @@
 <div>
     You have the following Key results assigned:
 </div>
-@foreach($results as $collection)
-    @foreach($collection as $result)
+@foreach($results as $result)
+    @if($result->progress < 100)
         {{$result->name}}<br>
-    @endforeach
+    @endif
 @endforeach
+{{dd(1)}}
 </body>
 </html>
