@@ -6,6 +6,9 @@
         <form action="{{route('company.store')}}" method="post">
             @csrf
             <div class="form-group w-25">
+                @error('name')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
                 <label for="companyName">Company Name</label>
                 <input type="text" class="form-control" name="name" id="companyName">
             </div>

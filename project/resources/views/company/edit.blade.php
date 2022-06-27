@@ -7,6 +7,9 @@
             @csrf
             @method('patch')
             <div class="form-group w-25">
+                @error('name')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
                 <label for="companyName">Company Name</label>
                 <input type="text" class="form-control" name="name" id="companyName" value="{{$company->name}}">
             </div>
