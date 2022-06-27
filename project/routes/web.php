@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KeyResultController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ObjectiveController;
@@ -31,8 +32,6 @@ Route::group(['prefix' => 'companies'], function(){
 });
 
 
-
-
 Route::get('/objectives', [ObjectiveController::class, 'index'])->name('objectives.index');
 
 Route::get('/objectives/create', [ObjectiveController::class, 'create'])->name('objectives.create');
@@ -48,4 +47,13 @@ Route::put('/objectives/{objective}', [ObjectiveController::class, 'update'])->n
 Route::delete('/objectives/{objective}', [ObjectiveController::class, 'destroy'])->name('objectives.destroy');
 Route::get('/template', function () {
     return view('templates/index');
+});
+
+Route::group(['prefix' => 'key_results'], function() {
+    Route::get('/{company}',[KeyResultController::class,'show'])->name('key-result.show');
+    Route::get('/{objective}/create',[KeyResultController::class,'create'])->name('key-result.create');
+    Route::post('/',[KeyResultController::class,'store'])->name('key-result.store');
+    Route::get('/{keyResult}/edit',[KeyResultController::class,'edit'])->name('key-result.edit');
+    Route::patch('/{keyResult}',[KeyResultController::class,'update'])->name('key-result.update');
+    Route::delete('/{keyResult}',[KeyResultController::class,'destroy'])->name('key-result.destroy');
 });

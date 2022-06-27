@@ -7,7 +7,6 @@
             <div class="col-2">
                 <a href="{{route('company.create')}}" type="button" class="btn btn-primary bt-md">Create new</a>
             </div>
-
         </div>
         <div class="row">
 
@@ -24,7 +23,8 @@
                     <tr>
                         <th scope="row">{{$company->id}}</th>
                         <td>{{$company->name}}</td>
-                        <td><div class="d-inline-flex">
+                        <td>
+                            <div class="d-inline-flex">
                                 <a href="{{route('company.edit',$company->id)}}">edit</a>&nbsp;|&nbsp;
                                 <form action="{{route('company.destroy',$company->id)}}" method="post" id="my_form">
                                     @csrf

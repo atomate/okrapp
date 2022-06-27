@@ -11,7 +11,8 @@ class Objective extends Model
 
     protected $table = 'objective';
     protected $fillable = [
-        'name'
+        'name',
+        'company_id'
     ];
 
     public function company()
@@ -19,5 +20,9 @@ class Objective extends Model
         return $this->belongsTo(Company::class);
     }
 
-    
+    public function keyResult()
+    {
+        return $this->hasMany(KeyResult::class);
+    }
+
 }
