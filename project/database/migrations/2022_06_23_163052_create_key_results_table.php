@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('results', function (Blueprint $table) {
+        Schema::create('key_results', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->smallInteger('progress');
             $table->unsignedBigInteger('objective_id');
             $table->index('objective_idx');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('results');
+        Schema::dropIfExists('key_results');
     }
 };

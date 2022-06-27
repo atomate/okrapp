@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Models\Company;
 use App\Models\Objective;
-use App\Models\Result;
+use App\Models\KeyResult;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Collection;

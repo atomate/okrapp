@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Result;
+use App\Models\KeyResult;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Result>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\KeyResult>
  */
-class ResultFactory extends Factory
+class KeyResultFactory extends Factory
 {
-    protected $model = Result::class;
+    protected $model = KeyResult::class;
 
     public function definition()
     {
         return [
-            'name' => $this->faker->text(7),
+            'title' => $this->faker->word(),
             'progress' => $this->faker->numberBetween(1,100),
         ];
     }

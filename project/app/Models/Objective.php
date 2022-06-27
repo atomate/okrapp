@@ -19,9 +19,9 @@ class Objective extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function results()
+    public function keyResults()
     {
-        return $this->hasMany(Result::class,);
+        return $this->hasMany(KeyResult::class,);
     }
 
 }

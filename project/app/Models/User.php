@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     function results()
     {
-        return $this->hasManyDeep(Result::class, [Company::class, Objective::class]);
+        return $this->hasManyDeep(KeyResult::class, [Company::class, Objective::class]);
     }
 
 }
