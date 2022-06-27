@@ -7,9 +7,18 @@ use App\Http\Requests\KeyResult\UpdateRequest;
 use App\Models\Company;
 use App\Models\KeyResult;
 use App\Models\Objective;
+use App\Repositories\KeyResultRepository;
+
 
 class KeyResultController extends Controller
 {
+    private $repository;
+
+    public function __construct(KeyResultRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     function show(Company $company)
     {
         $objectives = Objective::all()->where('company_id', $company->id);
@@ -25,10 +34,9 @@ class KeyResultController extends Controller
     function store(StoreRequest $request)
     {
         $data = $request->validated();
-        KeyResult::create($data);
-        $objective = Objective::find($data['objective_id']);
+        $objective = $this->repository->store($data);
 
-        return redirect()->route('key-result.show', $objective->company->id);
+        return redirect()->route('key-result.show', $objective->company_id);
     }
 
     function edit(KeyResult $keyResult)
@@ -36,21 +44,18 @@ class KeyResultController extends Controller
         return view('keyresult.edit', ['keyResult' => $keyResult]);
     }
 
-    function update(UpdateRequest $request,KeyResult $keyResult)
+    function update(UpdateRequest $request, KeyResult $keyResult)
     {
         $data = $request->validated();
-        $keyResult->update($data);
+        $objective = $this->repository->update($keyResult, $data);
 
-        $keyResult = KeyResult::find($data['keyResult_id']);
-        $objective = Objective::find($keyResult->objective_id);
-
-        return redirect()->route('key-result.show',$objective->company_id);
+        return redirect()->route('key-result.show', $objective->company_id);
     }
 
-    function destroy(KeyResult $keyResult) {
+    function destroy(KeyResult $keyResult)
+    {
+        $objective = $this->repository->delete($keyResult);
 
-        $keyResult->delete();
-        $objective = Objective::find($keyResult->objective->id);
-        return redirect()->route('key-result.show',$objective->company_id);
+        return redirect()->route('key-result.show', $objective->company_id);
     }
 }
