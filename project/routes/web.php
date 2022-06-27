@@ -4,6 +4,7 @@ use App\Http\Controllers\KeyResultController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ObjectiveController;
+use App\Http\Controllers\FrontEndController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::delete('/objectives/{objective}', [ObjectiveController::class, 'destroy']
 Route::get('/template', function () {
     return view('templates/index');
 });
+
+Route::get('/collections',[FrontendController::class,'index']);
 
 Route::group(['prefix' => 'key_results'], function() {
     Route::get('/{company}',[KeyResultController::class,'show'])->name('key-result.show');

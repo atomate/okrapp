@@ -15,7 +15,7 @@ class ObjectiveController extends Controller
      */
     public function index()
     {
-        $objectives = Objective::latest()->paginate(5);
+        $objectives = Objective::all();
 
         return view('objectives.index',compact('objectives'));
     }
@@ -40,18 +40,23 @@ class ObjectiveController extends Controller
     public function store(Request $request)
     {
         $company = Company::findOrFail($request->company_id);
-        $company->objective()->create([
-            'name' => $request->name
-        ]);
+
+        $objective = new Objective;
+        $objective->name = $request->name;
+
+        $company->objective()->save($objective);
+
+        // $company->objective()->create([
+        //     'name' => $request->name
+        // ]);
         
         $request->validate([
             'name' => 'required',
         ]);
 
-        // Objective::create($request->all());
 
         return redirect()->route('objectives.index')
-            ->with('success', 'Objective created successfully.');
+            ->with('message', 'Objective created successfully.');
     }
 
     /**
@@ -71,9 +76,11 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function edit(Objective $objective)
-    {
-        return view('objectives.edit', compact('objective'));
+    public function edit(int $objective)
+    {   
+        $companies = Company::all();
+        $objective = Objective::findOrFail($objective);
+        return view('objectives.edit', compact('objective','companies'));
     }
 
     /**
@@ -83,16 +90,23 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Objective $objective)
+    public function update(Request $request, $objective_id)
     {
-        $request->validate([
-            'name' => 'required',
+        // $objective = Company::findOrFail($request->company_id)                       
+        //             ->objective()->where('id',$objective_id)->first();
+
+        // $objective->name = $request->name;
+
+        // $objective->update();
+
+        $company = Company::findOrFail($request->company_id);
+        $company->objective()->where('id',$objective_id)->update([
+            'name' => $request->name
         ]);
-        $objective->update($request->all());
 
         return redirect()->route('objectives.index')
-            ->with('success', 'Objective updated successfully');
-    }
+        ->with('message', 'Objective updated successfully');
+            }
 
     /**
      * Remove the specified resource from storage.
@@ -100,11 +114,11 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Objective $objective)
+    public function destroy(int $objective_id)
     {
-        $objective->delete();
-
+        
+        Objective::findOrFail($objective_id)->delete();
         return redirect()->route('objectives.index')
-            ->with('success', 'Objective deleted successfully');
+            ->with('message', 'Objective deleted successfully');
     }
 }

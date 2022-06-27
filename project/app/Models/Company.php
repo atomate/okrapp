@@ -12,7 +12,7 @@ class Company extends Model
     protected $table = "companies";
     protected $fillable = ['title'];
 
-    public function objectives()
+    public function objective()
     {
         return $this->hasMany(Objective::class,'company_id','id');
     }
