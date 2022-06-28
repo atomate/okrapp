@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('title');
             $table->smallInteger('progress');
             $table->unsignedBigInteger('objective_id');
-            $table->index('objective_idx');
             $table->foreign('objective_id')->references('id')->on('objective')->cascadeOnDelete();
 //            $table->unsignedBigInteger('user_id');
 //            $table->index('user_idx');
