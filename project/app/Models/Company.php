@@ -11,7 +11,7 @@ class Company extends Model
 
 
     protected $table = "companies";
-    protected $fillable = ['name'];
+    protected $fillable = ['name','user_id'];
 
     public function objectives()
     {

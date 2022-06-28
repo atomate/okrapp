@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Company\StoreRequest;
 use App\Http\Requests\Company\UpdateRequest;
 use App\Models\Company;
+use Auth;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -41,6 +42,7 @@ class CompanyController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
+        $data['user_id'] = Auth::id();
         Company::create($data);
 
         return redirect()->route('company.index');
