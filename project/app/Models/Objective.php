@@ -22,7 +22,7 @@ class Objective extends Model
 
     public function keyResults()
     {
-        return $this->hasMany(KeyResult::class,);
+        return $this->hasMany(KeyResult::class);
     }
 
 }

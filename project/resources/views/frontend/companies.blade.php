@@ -10,9 +10,9 @@
       <div class="card">
         <div class="card-body">
           <h4>{{ $company->name }}</h4>
-          @if (count($company->objective) > 0)
+          @if (count($company->objectives) > 0)
           <ul>
-            @foreach ($company->objective as $item)
+            @foreach ($company->objectives as $item)
             <li>{{ $item->name }}</li>
             @endforeach
           </ul>

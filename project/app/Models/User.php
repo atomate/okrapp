@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class User extends Authenticatable
 {
-    use HasRelationships;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -47,11 +45,6 @@ class User extends Authenticatable
     public function companies()
     {
         return $this->hasMany(Company::class);
-    }
-
-    function results()
-    {
-        return $this->hasManyDeep(KeyResult::class, [Company::class, Objective::class]);
     }
 
 }

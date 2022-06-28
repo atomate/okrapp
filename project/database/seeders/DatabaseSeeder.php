@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(2)->has(Company::factory(1)->has(Objective::factory(3)->has(KeyResult::factory(2))))->create();
+        User::factory(2)->has(
+            Company::factory(1)->has(
+                Objective::factory(3)->has(
+                    KeyResult::factory(2)
+                )))->create();
     }
 }

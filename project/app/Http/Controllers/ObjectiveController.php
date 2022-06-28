@@ -44,11 +44,7 @@ class ObjectiveController extends Controller
         $objective = new Objective;
         $objective->name = $request->name;
 
-        $company->objective()->save($objective);
-
-        // $company->objective()->create([
-        //     'name' => $request->name
-        // ]);
+        $company->objectives()->save($objective);
         
         $request->validate([
             'name' => 'required',
@@ -100,7 +96,7 @@ class ObjectiveController extends Controller
         // $objective->update();
 
         $company = Company::findOrFail($request->company_id);
-        $company->objective()->where('id',$objective_id)->update([
+        $company->objectives()->where('id',$objective_id)->update([
             'name' => $request->name
         ]);
 
