@@ -16,9 +16,7 @@
     You have the following Key results assigned:
 </div>
 @foreach($results as $result)
-    @if($result->progress < 100)
-        {{$result->title}}<br>
-    @endif
+        {{$result}}<br>
 @endforeach
 </body>
 </html>

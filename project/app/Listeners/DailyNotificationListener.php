@@ -27,25 +27,29 @@ class DailyNotificationListener
     {
         $name = $event->user->name;
         $user = User::find($event->user->id);
-        $user = $user->load('results');
-
-
 
         $results = [];
-        $companies = Company::where('user_id',$user->id)->get();
-        foreach($companies as $company) {
+        $companies = Company::where('user_id', $user->id)->get();
+        foreach ($companies as $company) {
             $objectives = Objective::where('company_id', $company->id)->get();
-            foreach($objectives as $objectives) {
-                $results[] = $objectives->results(); 
+            foreach ($objectives as $objective) {
+                $results[] = $objective->keyResults()->where('progress', '<', '100')->pluck('title');
             }
         }
 
-        if(sizeof($results)>0) {
+        $resultTemp = [];
+        foreach ($results as $result) {
+            $resultTemp[] = $result->toArray();
+        }
+        $results = call_user_func_array('array_merge', $resultTemp);
+
+
+        if (sizeof($results) > 0) {
             $data = [
                 'results' => $results
             ];
-    
-            Mail::send('mail.DailyNotification', $data, function($message) use ($user,$name) {
+
+            Mail::send('mail.DailyNotification', $data, function ($message) use ($user, $name) {
                 $message->to($user['email']);
                 $message->subject("Update Notification for $name");
             });

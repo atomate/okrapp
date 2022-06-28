@@ -30,29 +30,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        // $company = Company::where('id',1)->get();
-        // var_dump($company);exit();
-
-
-        // $results = [];
-        // foreach($companies as $company) {
-        //     $results[] = $company->objectives->keyResults;
-        // }
-
-
-
-        // dd($results);
-
-
-
-        $objectives = $user->companies->where('id',1)->first()->objectives;
-
-        // $objective = Objective::with('company')->where('id',1)->first();
-        // dd($objective->company());
-
-
         return view('home');
     }
 }
