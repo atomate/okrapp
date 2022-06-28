@@ -10,7 +10,7 @@ class Company extends Model
     use HasFactory;
 
     protected $table = "companies";
-    protected $fillable = ['title'];
+    protected $fillable = ['name'];
 
     public function objective()
     {
