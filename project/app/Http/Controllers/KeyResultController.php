@@ -21,7 +21,8 @@ class KeyResultController extends Controller
 
     function show(Company $company)
     {
-        $objectives = Objective::all()->where('company_id', $company->id);
+        $objectives = Objective::where('company_id', $company->id)->get();
+
 
         return view('keyresult.show', ['company' => $company, 'objectives' => $objectives]);
     }

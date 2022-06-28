@@ -47,7 +47,7 @@ class HomeController extends Controller
 
 
 
-        //$user->companies->where('id',1)->first()->objectives
+        $objectives = $user->companies->where('id',1)->first()->objectives;
 
         // $objective = Objective::with('company')->where('id',1)->first();
         // dd($objective->company());

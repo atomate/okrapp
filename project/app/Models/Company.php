@@ -17,4 +17,8 @@ class Company extends Model
     {
         return $this->hasMany(Objective::class);
     }
+
+    public function hasShortName() {
+        return (strlen($this->name)<10);
+    }
 }
