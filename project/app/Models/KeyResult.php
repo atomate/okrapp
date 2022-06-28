@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class KeyResult extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'title',
         'progress',

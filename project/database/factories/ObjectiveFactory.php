@@ -2,22 +2,20 @@
 
 namespace Database\Factories;
 
+use App\Models\Objective;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Objective>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
 class ObjectiveFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Objective::class;
+
     public function definition()
     {
         return [
-            'name' => $this->faker->word
+            'name' => $this->faker->word,
         ];
     }
 }

@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Company;
-use App\Models\KeyResult;
 use App\Models\Objective;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\KeyResult;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Company::factory(2)->has(Objective::factory(2)->has(KeyResult::factory(2)))->create();
+        User::factory(2)->has(Company::factory(1)->has(Objective::factory(3)->has(KeyResult::factory(2))))->create();
     }
 }

@@ -20,9 +20,9 @@ class Objective extends Model
         return $this->belongsTo(Company::class, 'company_id','id');
     }
 
-    public function keyResult()
+    public function keyResults()
     {
-        return $this->hasMany(KeyResult::class);
+        return $this->hasMany(KeyResult::class,);
     }
 
 }

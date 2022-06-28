@@ -2,23 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\KeyResult;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\KeyResult>
  */
 class KeyResultFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = KeyResult::class;
+
     public function definition()
     {
         return [
-            'title' => $this->faker->word,
-            'progress' => $this->faker->numberBetween(1,100)
+            'title' => $this->faker->word(),
+            'progress' => $this->faker->numberBetween(1,100),
         ];
     }
 }

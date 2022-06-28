@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('company_id');
+            $table->index('company_idx');
             $table->foreign('company_id')
             ->references('id')
             ->on('companies')

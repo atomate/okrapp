@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -17,11 +18,6 @@ return new class extends Migration {
             $table->string('title');
             $table->smallInteger('progress');
             $table->unsignedBigInteger('objective_id');
-            $table->foreign('objective_id')->references('id')->on('objective')->cascadeOnDelete();
-//            $table->unsignedBigInteger('user_id');
-//            $table->index('user_idx');
-//            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-
             $table->timestamps();
         });
     }
