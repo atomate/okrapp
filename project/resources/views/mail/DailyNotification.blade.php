@@ -17,7 +17,7 @@
 </div>
 @foreach($results as $result)
     @if($result->progress < 100)
-        {{$result->name}}<br>
+        {{$result->title}}<br>
     @endif
 @endforeach
 </body>
