@@ -1,16 +1,17 @@
 @extends('layouts.app')
-@section('title','Company create')
+@section('title','Company edit')
 @section('content')
     <div class="container">
-        <h1>Create Company</h1>
-        <form action="{{route('company.store')}}" method="post">
+        <h1>Edit Company</h1>
+        <form action="{{route('company.update',$company->id)}}" method="post">
             @csrf
+            @method('patch')
             <div class="form-group w-25">
                 @error('name')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
                 <label for="companyName">Company Name</label>
-                <input type="text" class="form-control" name="name" id="companyName">
+                <input type="text" class="form-control" name="name" id="companyName" value="{{$company->name}}">
             </div>
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>

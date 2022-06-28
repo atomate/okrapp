@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KeyResultController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ObjectiveController;
@@ -16,26 +17,43 @@ use App\Http\Controllers\ObjectiveController;
 */
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/about', function (){
+Route::get('/about', function () {
     return view('about');
 })->name('about');
 Auth::routes();
 
-Route::get('/company/create', [CompanyController::class, 'create']);
+Route::group(['prefix' => 'companies'], function(){
+   Route::get('/',[CompanyController::class,'index'])->name('company.index');
+   Route::get('/create',[CompanyController::class,'create'])->name('company.create');
+   Route::post('/',[CompanyController::class,'store'])->name('company.store');
+   Route::get('/{company}/edit',[CompanyController::class,'edit'])->name('company.edit');
+   Route::patch('/{company}',[CompanyController::class,'update'])->name('company.update');
+   Route::delete('/{company}',[CompanyController::class,'destroy'])->name('company.destroy');
+});
 
-Route::get('/objectives',[ObjectiveController::class,'index'])->name('objectives.index');
 
-Route::get('/objectives/create',[ObjectiveController::class,'create'])->name('objectives.create');
+Route::get('/objectives', [ObjectiveController::class, 'index'])->name('objectives.index');
 
-Route::post('/objectives',[ObjectiveController::class,'store'])->name('objectives.store');
+Route::get('/objectives/create', [ObjectiveController::class, 'create'])->name('objectives.create');
 
-Route::get('/objectives/{objective}',[ObjectiveController::class,'show'])->name('objectives.show');
+Route::post('/objectives', [ObjectiveController::class, 'store'])->name('objectives.store');
 
-Route::get('/objectives/{objective}/edit',[ObjectiveController::class,'edit'])->name('objectives.edit');
+Route::get('/objectives/{objective}', [ObjectiveController::class, 'show'])->name('objectives.show');
 
-Route::put('/objectives/{objective}',[ObjectiveController::class,'update'])->name('objectives.update');
+Route::get('/objectives/{objective}/edit', [ObjectiveController::class, 'edit'])->name('objectives.edit');
 
-Route::delete('/objectives/{objective}',[ObjectiveController::class,'destroy'])->name('objectives.destroy');
-Route::get('/template', function(){
+Route::put('/objectives/{objective}', [ObjectiveController::class, 'update'])->name('objectives.update');
+
+Route::delete('/objectives/{objective}', [ObjectiveController::class, 'destroy'])->name('objectives.destroy');
+Route::get('/template', function () {
     return view('templates/index');
+});
+
+Route::group(['prefix' => 'key_results'], function() {
+    Route::get('/{company}',[KeyResultController::class,'show'])->name('key-result.show');
+    Route::get('/{objective}/create',[KeyResultController::class,'create'])->name('key-result.create');
+    Route::post('/',[KeyResultController::class,'store'])->name('key-result.store');
+    Route::get('/{keyResult}/edit',[KeyResultController::class,'edit'])->name('key-result.edit');
+    Route::patch('/{keyResult}',[KeyResultController::class,'update'])->name('key-result.update');
+    Route::delete('/{keyResult}',[KeyResultController::class,'destroy'])->name('key-result.destroy');
 });

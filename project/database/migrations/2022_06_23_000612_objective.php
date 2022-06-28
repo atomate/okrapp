@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('company_id');
             $table->index('company_idx');
-            $table->foreign('company_id')->references('id')->on('company');
+            $table->foreign('company_id')
+            ->references('id')
+            ->on('companies')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -11,7 +11,8 @@ class Objective extends Model
 
     protected $table = 'objective';
     protected $fillable = [
-        'name'
+        'name',
+        'company_id'
     ];
 
     public function company()
