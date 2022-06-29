@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Models\Objective;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -112,12 +112,13 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function destroy( int $objective_id)
+    public function destroy(int $objective_id)
     { 
+        $company = DB::table('objective')->where('id',$objective_id)->first();
 
         $objective = Objective::findOrFail($objective_id)->delete();
 
-        return redirect()->route('key-result.show',$company->id);
+        return redirect()->route('key-result.show',$company->company_id);
         // return redirect()->route('objectives.index')
         //     ->with('message', 'Objective deleted successfully');
     }
