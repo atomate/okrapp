@@ -3,7 +3,9 @@
 @section('content')
     <div class="container-sm">
         <div class="row">
-            <h1>{{$company->name}}</h1>
+            <h1>{{$company->name}}
+            <a href="{{ url('objectives/create') }}" class="btn btn-primary float-end">Add Objectives</a>
+        </h1>
         </div>
         <hr>
         <div class="row">
@@ -11,6 +13,9 @@
                 <div class="col-12 d-flex align-items-center">
                     <h1 class="text-center">{{$objective->name}}</h1>
                     <h2 class="text-center mt-1">-{{round($objective->keyResults->avg('progress'))}}%</h2>
+                    <a href="{{ url('objectives/'.$objective->id.'/edit') }}" class="btn btn-success">Edit</a>
+                    @method('DELETE')
+                    <a href="{{ url('objectives/'.$objective->id.'/delete') }}" class="btn btn-danger">Delete</a>
                 </div>
                 <div class="col-12">
                     <ul>

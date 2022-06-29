@@ -83,8 +83,9 @@
                                     <td>{{$item->company->name}}</td>
                                     <td>
                                         <a href="{{ url('objectives/'.$item->id.'/edit') }}" class="btn btn-success">Edit</a>
-                                        @method('DELETE')
+                                        @method('delete')
                                         <a href="{{ url('objectives/'.$item->id.'/delete') }}" class="btn btn-danger">Delete</a>
+                                        
                                     </td>
                                 </tr>
                                 @endforeach

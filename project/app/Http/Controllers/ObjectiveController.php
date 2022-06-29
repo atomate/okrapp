@@ -50,9 +50,9 @@ class ObjectiveController extends Controller
             'name' => 'required',
         ]);
 
-
-        return redirect()->route('objectives.index')
-            ->with('message', 'Objective created successfully.');
+        return redirect()->route('key-result.show', $company->id);
+        // return redirect()->route('objectives.index')
+        //     ->with('message', 'Objective created successfully.');
     }
 
     /**
@@ -100,8 +100,10 @@ class ObjectiveController extends Controller
             'name' => $request->name
         ]);
 
-        return redirect()->route('objectives.index')
-        ->with('message', 'Objective updated successfully');
+        // return redirect()->route('objectives.index')
+        // ->with('message', 'Objective updated successfully');
+
+        return redirect()->route('key-result.show', $company->id);
             }
 
     /**
@@ -110,11 +112,13 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $objective_id)
-    {
-        
-        Objective::findOrFail($objective_id)->delete();
-        return redirect()->route('objectives.index')
-            ->with('message', 'Objective deleted successfully');
+    public function destroy( int $objective_id)
+    { 
+
+        $objective = Objective::findOrFail($objective_id)->delete();
+
+        return redirect()->route('key-result.show',$company->id);
+        // return redirect()->route('objectives.index')
+        //     ->with('message', 'Objective deleted successfully');
     }
 }

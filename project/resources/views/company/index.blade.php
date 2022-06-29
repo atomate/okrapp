@@ -22,7 +22,7 @@
                 @foreach($companies as $company)
                     <tr>
                         <th scope="row">{{$company->id}}</th>
-                        <td>{{$company->name}}</td>
+                        <td><a href="{{route('key-result.show',$company->id)}}">{{$company->name}}</a></td>
                         <td>
                             <div class="d-inline-flex">
                                 <a href="{{route('company.edit',$company->id)}}">edit</a>&nbsp;|&nbsp;
