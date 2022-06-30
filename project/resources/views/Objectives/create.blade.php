@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Add Objective
-                            <a href="{{ url('objectives') }}" class="btn btn-primary float-end">BACK</a>
+                            <a href="{{ route('key-result.show',$company_id) }}" class="btn btn-primary float-end">BACK</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -18,7 +18,8 @@
                             <label>Select Company</label>
                             <select name="company_id" class="form-control">
                                 @foreach ($companies as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->id }}" {{ $company_id == $item->id ? 'selected':'' }}>{{ $item->name }}</option>
+                                    {{-- <option value="{{ $item->id }}">{{ $item->name }}</option> --}}
                                 @endforeach
                             </select>
 

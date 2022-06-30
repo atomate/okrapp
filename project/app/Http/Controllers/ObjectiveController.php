@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
 use App\Models\Objective;
 use App\Models\Company;
 use App\Http\Requests\Objective\ObjectiveStoreRequest;
+use App\Http\Requests\Objective\UpdateRequest;
 
 class ObjectiveController extends Controller
 {
@@ -26,9 +26,10 @@ class ObjectiveController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Company $company)
-    {
+    {         
+            $company_id = $company->id;
             $companies = Company::all();
-            return view('objectives.create',compact('companies', 'company'));
+            return view('objectives.create',compact('companies', 'company_id'));
     }
 
     /**
@@ -82,22 +83,13 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $objective_id)
+    public function update(UpdateRequest $request, $objective_id)
     {
-        // $objective = Company::findOrFail($request->company_id)                       
-        //             ->objective()->where('id',$objective_id)->first();
-
-        // $objective->name = $request->name;
-
-        // $objective->update();
-
+        
         $company = Company::findOrFail($request->company_id);
         $company->objectives()->where('id',$objective_id)->update([
             'name' => $request->name
         ]);
-
-        // return redirect()->route('objectives.index')
-        // ->with('message', 'Objective updated successfully');
 
         return redirect()->route('key-result.show', $company->id);
             }
