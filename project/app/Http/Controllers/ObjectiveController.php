@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\Objective;
 use App\Models\Company;
-use Illuminate\Http\Request;
+use App\Http\Requests\Objective\ObjectiveStoreRequest;
 
 class ObjectiveController extends Controller
 {
@@ -37,7 +37,7 @@ class ObjectiveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ObjectiveStoreRequest $request)
     {
         
         $company = Company::findOrFail($request->company_id);
