@@ -45,13 +45,15 @@ Route::group(['middleware' => 'auth'],function (){
         Route::patch('/{keyResult}',[KeyResultController::class,'update'])->name('key-result.update');
         Route::delete('/{keyResult}',[KeyResultController::class,'destroy'])->name('key-result.destroy');
     });
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
+    Route::get('/template', function () {
+        return view('templates/index');
+    });
 });
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+
 Auth::routes();
-Route::get('/template', function () {
-    return view('templates/index');
-});
+
 
