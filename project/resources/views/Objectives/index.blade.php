@@ -42,7 +42,7 @@
                         </a>
 
                         @csrf
-                        @method('DELETE')
+                        
 
                         <button class="btn btn-danger" type="submit" title ="delete">
                             Delete
@@ -83,7 +83,7 @@
                                     <td>{{$item->company->name}}</td>
                                     <td>
                                         <a href="{{ url('objectives/'.$item->id.'/edit') }}" class="btn btn-success">Edit</a>
-                                        @method('delete')
+                                        
                                         <a href="{{ url('objectives/'.$item->id.'/delete') }}" class="btn btn-danger">Delete</a>
                                         
                                     </td>
