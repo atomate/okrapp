@@ -33,12 +33,12 @@ Route::group(['prefix' => 'companies'], function(){
 
 Route::group(['prefix' => 'objectives'],function(){
     Route::get('/', [ObjectiveController::class, 'index'])->name('objectives.index');
-    Route::get('/create', [ObjectiveController::class, 'create'])->name('objectives.create');
+    Route::get('/create/{company}', [ObjectiveController::class, 'create'])->name('objectives.create');
     Route::post('/', [ObjectiveController::class, 'store'])->name('objectives.store');
     Route::get('/{objective}', [ObjectiveController::class, 'show'])->name('objectives.show');
     Route::get('/{objective}/edit', [ObjectiveController::class, 'edit'])->name('objectives.edit');
     Route::put('/{objective}', [ObjectiveController::class, 'update'])->name('objectives.update');
-    Route::get('/{objective_id}/delete', [ObjectiveController::class,'destroy']);
+    Route::get('/{objective}/delete', [ObjectiveController::class,'destroy']);
     // Route::delete('/{objective}', [ObjectiveController::class, 'destroy'])->name('objectives.destroy');
 });
 
