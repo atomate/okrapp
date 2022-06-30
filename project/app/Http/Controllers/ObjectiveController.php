@@ -39,16 +39,12 @@ class ObjectiveController extends Controller
      */
     public function store(Request $request)
     {
+        
         $company = Company::findOrFail($request->company_id);
-
         $objective = new Objective;
         $objective->name = $request->name;
-
         $company->objectives()->save($objective);
-        
-        $request->validate([
-            'name' => 'required',
-        ]);
+
 
         return redirect()->route('key-result.show', $company->id);
         // return redirect()->route('objectives.index')
