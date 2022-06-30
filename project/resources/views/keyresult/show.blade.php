@@ -4,7 +4,7 @@
     <div class="container-sm">
         <div class="row">
             <h1>{{$company->name}}
-            <a href="{{ url('objectives/create') }}" class="btn btn-primary float-end">Add Objectives</a>
+            <a href="{{ route('objectives.create', $company->id) }}" class="btn btn-primary float-end">Add Objectives</a>
         </h1>
         </div>
         <hr>

@@ -25,10 +25,10 @@ class ObjectiveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Company $company)
     {
             $companies = Company::all();
-            return view('objectives.create',compact('companies'));
+            return view('objectives.create',compact('companies', 'company'));
     }
 
     /**
@@ -44,11 +44,12 @@ class ObjectiveController extends Controller
         $objective = new Objective;
         $objective->name = $request->name;
 
-        $company->objectives()->save($objective);
-        
         $request->validate([
             'name' => 'required',
         ]);
+
+        $company->objectives()->save($objective);
+        
 
         return redirect()->route('key-result.show', $company->id);
         // return redirect()->route('objectives.index')
@@ -112,14 +113,12 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $objective_id)
+    public function destroy(Objective $objective)
     { 
-        $company = DB::table('objective')->where('id',$objective_id)->first();
 
-        $objective = Objective::findOrFail($objective_id)->delete();
+        $company_id = $objective->company_id;
+        $objective->delete();
 
-        return redirect()->route('key-result.show',$company->company_id);
-        // return redirect()->route('objectives.index')
-        //     ->with('message', 'Objective deleted successfully');
+        return redirect()->route('key-result.show',$company_id);
     }
 }
