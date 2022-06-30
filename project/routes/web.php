@@ -60,3 +60,8 @@ Route::group(['prefix' => 'key_results'], function() {
     Route::patch('/{keyResult}',[KeyResultController::class,'update'])->name('key-result.update');
     Route::delete('/{keyResult}',[KeyResultController::class,'destroy'])->name('key-result.destroy');
 });
+
+
+Route::get('/dashboard/index',function() {
+    return view('templates/dashboard/index');
+});
