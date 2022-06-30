@@ -14,7 +14,6 @@
                     <h1 class="text-center">{{$objective->name}}</h1>
                     <h2 class="text-center mt-1">-{{round($objective->keyResults->avg('progress'))}}%</h2>
                     <a href="{{ url('objectives/'.$objective->id.'/edit') }}" class="btn btn-success">Edit</a>
-                    @method('DELETE')
                     <a href="{{ url('objectives/'.$objective->id.'/delete') }}" class="btn btn-danger">Delete</a>
                 </div>
                 <div class="col-12">

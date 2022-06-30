@@ -42,7 +42,7 @@
                         </a>
 
                         @csrf
-                        @method('DELETE')
+                        
 
                         <button class="btn btn-danger" type="submit" title ="delete">
                             Delete
