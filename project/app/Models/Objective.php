@@ -9,7 +9,7 @@ class Objective extends Model
 {
     use HasFactory;
 
-    protected $table = 'objective';
+    protected $table = 'objectives';
     protected $fillable = [
         'name',
         'company_id'
