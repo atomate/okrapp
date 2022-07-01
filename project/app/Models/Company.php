@@ -27,4 +27,6 @@ class Company extends Model
     {
         return $this->hasMany(Team::class);
     }
+
+
 }

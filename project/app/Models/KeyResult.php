@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KeyResult extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'progress',
@@ -18,4 +19,5 @@ class KeyResult extends Model
     {
         return $this->belongsTo(Objective::class);
     }
+
 }
