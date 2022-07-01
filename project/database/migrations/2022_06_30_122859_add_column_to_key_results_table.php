@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -28,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('key_results', function (Blueprint $table) {
-            $table->dropForeign('objective_id');
+            $table->dropForeign('key_results_objective_id_foreign');
         });
     }
 };
