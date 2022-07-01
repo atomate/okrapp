@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\CompanyStoreRequest;
 use App\Http\Requests\CompanyUpdateRequest;
 use App\Models\Company;
@@ -19,8 +20,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
-        return view('company.index',['companies' => $companies]);
+        $companies = Company::all()->where('user_id', Auth::id());
+        return view('company.index', ['companies' => $companies]);
     }
 
     /**
@@ -49,17 +50,6 @@ class CompanyController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param company $company
@@ -67,7 +57,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view('company.edit',['company' => $company]);
+        return view('company.edit', ['company' => $company]);
     }
 
     /**
