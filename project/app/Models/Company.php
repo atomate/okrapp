@@ -11,14 +11,20 @@ class Company extends Model
 
 
     protected $table = "companies";
-    protected $fillable = ['name','user_id'];
+    protected $fillable = ['name', 'user_id'];
 
     public function objectives()
     {
         return $this->hasMany(Objective::class);
     }
 
-    public function hasShortName() {
-        return (strlen($this->name)<10);
+    public function hasShortName()
+    {
+        return (strlen($this->name) < 10);
+    }
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class);
     }
 }
