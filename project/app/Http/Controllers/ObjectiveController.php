@@ -48,8 +48,6 @@ class ObjectiveController extends Controller
         
 
         return redirect()->route('key-result.show', $company->id);
-        // return redirect()->route('objectives.index')
-        //     ->with('message', 'Objective created successfully.');
     }
 
     /**

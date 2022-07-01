@@ -13,13 +13,13 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('objectives') }}" method="POST">
+                        <form action="{{ route('objectives.store') }}" method="POST">
                             @csrf
                             <label>Select Company</label>
                             <select name="company_id" class="form-control">
                                 @foreach ($companies as $item)
                                 <option value="{{ $item->id }}" {{ $company_id == $item->id ? 'selected':'' }}>{{ $item->name }}</option>
-                                    {{-- <option value="{{ $item->id }}">{{ $item->name }}</option> --}}
+                    
                                 @endforeach
                             </select>
 
