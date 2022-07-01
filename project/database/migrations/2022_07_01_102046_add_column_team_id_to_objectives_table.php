@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,10 +13,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('key_results', function (Blueprint $table) {
-            $table->foreign('objective_id')
+        Schema::table('objective', function (Blueprint $table) {
+            $table->unsignedBigInteger('team_id');
+            $table->foreign('team_id')
                 ->references('id')
-                ->on('objective')->onDelete('cascade');;
+                ->on('teams')
+                ->onDelete('cascade');
         });
     }
 
@@ -26,8 +29,8 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::table('key_results', function (Blueprint $table) {
-            $table->dropForeign('key_results_objective_id_foreign');
+        Schema::table('objectives', function (Blueprint $table) {
+            $table->dropForeign('objective_team_id_foreign');
         });
     }
 };

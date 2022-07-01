@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\Company\StoreRequest;
-use App\Http\Requests\Company\UpdateRequest;
+
+use App\Http\Requests\CompanyStoreRequest;
+use App\Http\Requests\CompanyUpdateRequest;
 use App\Models\Company;
 use Auth;
 use Illuminate\Contracts\Foundation\Application;
@@ -19,8 +20,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
-        return view('company.index',['companies' => $companies]);
+        $companies = Company::all()->where('user_id', Auth::id());
+        return view('company.index', ['companies' => $companies]);
     }
 
     /**
@@ -36,27 +37,16 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreRequest $request
+     * @param CompanyStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request)
+    public function store(CompanyStoreRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = Auth::id();
         Company::create($data);
 
         return redirect()->route('company.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -67,17 +57,17 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view('company.edit',['company' => $company]);
+        return view('company.edit', ['company' => $company]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateRequest $request
+     * @param CompanyUpdateRequest $request
      * @param company $company
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Company $company)
+    public function update(CompanyUpdateRequest $request, Company $company)
     {
         $data = $request->validated();
         $company->update($data);

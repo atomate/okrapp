@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KeyResult\StoreRequest;
-use App\Http\Requests\KeyResult\UpdateRequest;
+use App\Http\Requests\KeyResultStoreRequest;
+use App\Http\Requests\KeyResultUpdateRequest;
 use App\Models\Company;
 use App\Models\KeyResult;
 use App\Models\Objective;
@@ -32,7 +32,7 @@ class KeyResultController extends Controller
         return view('keyresult.create', ['objective' => $objective]);
     }
 
-    function store(StoreRequest $request)
+    function store(KeyResultStoreRequest $request)
     {
         $data = $request->validated();
         $objective = $this->repository->store($data);
@@ -45,7 +45,7 @@ class KeyResultController extends Controller
         return view('keyresult.edit', ['keyResult' => $keyResult]);
     }
 
-    function update(UpdateRequest $request, KeyResult $keyResult)
+    function update(KeyResultUpdateRequest $request, KeyResult $keyResult)
     {
         $data = $request->validated();
         $objective = $this->repository->update($keyResult, $data);

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\KeyResult;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class KeyResultStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|string|min:3|max:255',
             'progress' => 'required|integer|min:0|max:100|',
-            'keyResult_id' => 'integer'
+            'objective_id' => 'required|integer'
         ];
     }
 }

@@ -12,10 +12,15 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('key_results', function (Blueprint $table) {
-            $table->foreign('objective_id')
+        Schema::create('teams', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')
                 ->references('id')
-                ->on('objective')->onDelete('cascade');;
+                ->on('companies')
+                ->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +31,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::table('key_results', function (Blueprint $table) {
-            $table->dropForeign('key_results_objective_id_foreign');
-        });
+        Schema::dropIfExists('teams');
     }
 };
