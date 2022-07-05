@@ -15,8 +15,8 @@
 <div>
     You have the following Key results assigned:
 </div>
-@foreach($results as $result)
-        {{$result}}<br>
+@foreach($keyResults as $keyResult)
+        {{$keyResult}}<br>
 @endforeach
 </body>
 </html>

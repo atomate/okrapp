@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Mail\DailyNotification;
 use App\Models\Company;
 use App\Models\Objective;
 use App\Models\KeyResult;
@@ -25,28 +26,16 @@ class DailyNotificationListener
 
     public function handle($event)
     {
-        $name = $event->user->name;
-        $user = User::find($event->user->id);
-
-        $objectives = $user->objectives;
-        $keyResultsTemp = $objectives->map(function ($objective) {
+        $keyResults = $event->user->objectives->map(function ($objective) {
             return $objective->keyResults()->where('progress', '<', '100')->pluck('title');
-        });
-
-        $keyResults = collect();
-        foreach ($keyResultsTemp as $keyResult) {
-            $keyResults = $keyResults->merge($keyResult);
-        }
+        })->flatten();
 
         if (sizeof($keyResults) > 0) {
-            $data = [
-                'results' => $keyResults
-            ];
-
-            Mail::send('mail.DailyNotification', $data, function ($message) use ($user, $name) {
-                $message->to($user['email']);
-                $message->subject("Update Notification for $name");
-            });
+            Mail::send('mail.DailyNotification', compact('keyResults'),
+                function ($message) use ($event) {
+                    $message->to($event->user->email);
+                    $message->subject('Update Notification for ' . $event->user->name);
+                });
         }
 
     }
