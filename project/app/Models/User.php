@@ -47,4 +47,8 @@ class User extends Authenticatable
         return $this->hasMany(Company::class);
     }
 
+    public function objectives()
+    {
+        return $this->hasManyThrough(Objective::class,Company::class);
+    }
 }

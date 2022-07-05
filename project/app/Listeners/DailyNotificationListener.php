@@ -28,25 +28,19 @@ class DailyNotificationListener
         $name = $event->user->name;
         $user = User::find($event->user->id);
 
-        $results = [];
-        $companies = Company::where('user_id', $user->id)->get();
-        foreach ($companies as $company) {
-            $objectives = Objective::where('company_id', $company->id)->get();
-            foreach ($objectives as $objective) {
-                $results[] = $objective->keyResults()->where('progress', '<', '100')->pluck('title');
-            }
+        $objectives = $user->objectives;
+        $keyResultsTemp = $objectives->map(function ($objective) {
+            return $objective->keyResults()->where('progress', '<', '100')->pluck('title');
+        });
+
+        $keyResults = collect();
+        foreach ($keyResultsTemp as $keyResult) {
+            $keyResults = $keyResults->merge($keyResult);
         }
 
-        $resultTemp = [];
-        foreach ($results as $result) {
-            $resultTemp[] = $result->toArray();
-        }
-        $results = call_user_func_array('array_merge', $resultTemp);
-
-
-        if (sizeof($results) > 0) {
+        if (sizeof($keyResults) > 0) {
             $data = [
-                'results' => $results
+                'results' => $keyResults
             ];
 
             Mail::send('mail.DailyNotification', $data, function ($message) use ($user, $name) {
@@ -54,5 +48,6 @@ class DailyNotificationListener
                 $message->subject("Update Notification for $name");
             });
         }
+
     }
 }
