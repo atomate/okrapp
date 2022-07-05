@@ -36,9 +36,9 @@ class ApiCompanyController extends Controller
      */
     public function store(CompanyStoreRequest $request)
     {
-        Company::create($request->validated());
         $company = new Company([
             'name' => $request->get('name'),
+            'user_id' => 1
         ]);
         $company->save();
 
