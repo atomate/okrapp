@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Mail\DailyNotification;
+use App\Mail\DailyNotificationMail;
 use App\Models\Company;
 use App\Models\Objective;
 use App\Models\KeyResult;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class DailyNotificationListener
+class DailyNotificationListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -31,11 +32,7 @@ class DailyNotificationListener
         })->flatten();
 
         if (sizeof($keyResults) > 0) {
-            Mail::send('mail.DailyNotification', compact('keyResults'),
-                function ($message) use ($event) {
-                    $message->to($event->user->email);
-                    $message->subject('Update Notification for ' . $event->user->name);
-                });
+            Mail::to($event->user->email)->send(new DailyNotificationMail($event->user,$keyResults));
         }
 
     }

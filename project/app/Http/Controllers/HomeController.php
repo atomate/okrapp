@@ -30,6 +30,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        foreach (User::all() as $user) {
+            event(new DailyNotificationEvent(User::find($user->id)));
+        }
         return view('home');
     }
 }
